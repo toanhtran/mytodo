@@ -1,13 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name mytodoApp
- * @description
- * # mytodoApp
- *
- * Main module of the application.
- */
 angular
   .module('mytodoApp', [
     'ngAnimate',
@@ -16,19 +8,21 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.sortable'
+    'ui.sortable',
+    'LocalStorageModule'
   ])
+  .config(['localStorageServiceProvider', function(localStorageServiceProvider){
+    localStorageServiceProvider.setPrefix('ls');
+  }])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'MainCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+        controller: 'AboutCtrl'
       })
       .otherwise({
         redirectTo: '/'
